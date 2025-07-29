@@ -1,0 +1,7 @@
+paper_results/
+*pycache*
+*.out
+wandb
+*.ipynb
+*pycache*
+.DS_Store
