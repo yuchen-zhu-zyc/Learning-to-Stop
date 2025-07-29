@@ -1,4 +1,4 @@
-# "Learning to Stop: Deep Learning for Mean Field Optimal Stopping"
+# Learning to Stop: Deep Learning for Mean Field Optimal Stopping
 
 [![Paper](https://img.shields.io/badge/Paper-PDF-brightgreen)](https://arxiv.org/abs/2410.08850v2)
 
