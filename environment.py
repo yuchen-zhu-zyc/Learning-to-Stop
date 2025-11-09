@@ -1,3 +1,26 @@
+"""Environment module for optimal stopping problems.
+
+This module defines an abstract base class and various concrete implementations
+of environments for optimal stopping problems. Each environment represents a
+stochastic process where an agent must decide when to stop to minimize expected
+costs.
+
+The base Environment class provides an interface for:
+- Initial distribution sampling
+- State propagation via Markov transition kernels
+- Cost computation (stopping, running, and terminal costs)
+
+Concrete implementations include:
+- RollaDie: Simple dice rolling environment
+- MoveorStay: Binary decision environment
+- MoveToRight: Linear state progression
+- CongestionDice: Dice with congestion-dependent transitions
+- DistCost: Distance-based cost to target distribution
+- TowardsUnif2D: 2D grid environment moving toward uniform distribution
+- DiceCommonNoise: Dice with common noise affecting transitions
+- MatchDistribution2D: 2D grid environment matching target distribution
+"""
+
 import abc
 import torch
 import numpy as np
