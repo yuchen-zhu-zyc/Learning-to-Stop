@@ -1,3 +1,30 @@
+"""Solver module for optimal stopping problems using neural networks.
+
+This module implements two approaches for solving optimal stopping problems:
+
+1. DirectApproach: Trains a single neural network that takes the current state
+   distribution (nu_cont, nu_stop) and time as inputs, and outputs stopping
+   probabilities. The network is trained end-to-end to minimize the expected
+   total cost over the entire time horizon.
+
+2. DPP (Dynamic Programming Principle): Implements a backward-in-time dynamic
+   programming approach. Trains separate neural networks for each time step,
+   starting from T-1 and working backwards to 0. Each network learns the optimal
+   stopping policy for its specific time step, using the already-trained future
+   networks to compute the value function.
+
+Both approaches:
+- Use neural network policies from the network module
+- Work with environments from the environment module
+- Compute losses based on stopping costs, running costs, and terminal costs
+- Support evaluation and visualization of learned policies
+- Can handle both state-embedded and distribution-only (synchronized) policies
+- Support 1D and 2D multi-dimensional state spaces
+
+The solvers track training and test losses, save model checkpoints, and can
+generate plots showing the evolution of distributions and stopping probabilities.
+"""
+
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
