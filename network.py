@@ -1,3 +1,27 @@
+"""Neural network module for optimal stopping policies.
+
+This module provides PyTorch neural network architectures for learning optimal
+stopping policies. The networks take distributional state information (nu) and
+optionally discrete state embeddings and time information as inputs, and output
+stopping probabilities.
+
+Policy network variants:
+- PolicyStateEmbT: Uses state embeddings and time embeddings
+- PolicyStateEmb: Uses state embeddings without time information
+- PolicyDistT: Uses distribution input with time embeddings
+- PolicyDist: Uses distribution input without time information
+
+All networks use ResNet-style fully connected blocks with GroupNorm normalization
+and SiLU activation functions. The output is passed through a sigmoid to produce
+stopping probabilities in [0, 1].
+
+Utility components:
+- timestep_embedding: Creates sinusoidal positional embeddings for time steps
+- SiLU: Swish activation function (x * sigmoid(x))
+- ResNet_FC: Fully connected ResNet block with residual connections
+- zero_module: Utility function to zero out module parameters
+"""
+
 import math
 import numpy as np
 
