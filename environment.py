@@ -212,7 +212,6 @@ class TowardsUnif2D(Environment):
         next_nu_cont = torch.matmul(next_nu_cont, self.P).reshape(-1, self.state_dim)
         return next_nu_stop, next_nu_cont
     
-
 class DiceCommonNoise(Environment):
     
     def __init__(self, sides = 6, T = 15, running_cst = 0.05, initial_mu = None, device = "cuda:0"):
@@ -264,9 +263,7 @@ class DiceCommonNoise(Environment):
         next_nu_cont = nu_cont * (1 - stop_prob)
         next_nu_cont = torch.bmm(next_nu_cont.unsqueeze(1), P).squeeze(1)
         return next_nu_stop, next_nu_cont
-    
-    
-    
+      
 class MatchDistribution2D(Environment):
     def __init__(self, T = 30, grid_dim = 4, transit_mode = "stay", initial_mu = None, target_mu = None, running_cst = 0.05, common_noise = False, device = "cuda:0"):
         self.T = T
@@ -448,44 +445,3 @@ class MatchDistribution2D(Environment):
                     # Probability of staying still is any remaining probability
                     P_batch[b, current_state, current_state] = prob if num_transitions == 0 else 0
         return P_batch
-
-    # def nonlinear_markov_kernel(self, common_noise):
-    #     B = common_noise.shape[0]
-    #     num_states = self.state_dim
-    #     N = self.grid_dim
-    #     P_batch = torch.zeros((B, num_states, num_states), device=self.device)
-        
-    #     for b in range(B):
-    #         obstacles_set = set(common_noise[b].tolist())
-    #         for x in range(N):
-    #             for y in range(N):
-    #                 current_state = x * N + y
-    #                 transitions = []
-    #                 # Check possible moves and their probabilities
-    #                 if y > 0 and (x * N + (y - 1)) not in obstacles_set:  # Move left
-    #                     left_state = x * N + (y - 1)
-    #                     transitions.append(left_state)
-    #                 if y < N - 1 and (x * N + (y + 1)) not in obstacles_set:  # Move right
-    #                     right_state = x * N + (y + 1)
-    #                     transitions.append(right_state)
-    #                 if x > 0 and ((x - 1) * N + y) not in obstacles_set:  # Move up
-    #                     up_state = (x - 1) * N + y
-    #                     transitions.append(up_state)
-    #                 if x < N - 1 and ((x + 1) * N + y) not in obstacles_set:  # Move down
-    #                     down_state = (x + 1) * N + y
-    #                     transitions.append(down_state)
-                    
-    #                 num_transitions = len(transitions)
-    #                 if num_transitions > 0:
-    #                     prob = 1.0 / num_transitions
-    #                 else:
-    #                     prob = 1.0
-                    
-    #                 # Set the probabilities in the transition matrix
-    #                 for state in transitions:
-    #                     P_batch[b, current_state, state] = prob
-                    
-    #                 # Probability of staying still is any remaining probability
-    #                 P_batch[b, current_state, current_state] = prob if num_transitions == 0 else 0
-        
-    #     return P_batch
