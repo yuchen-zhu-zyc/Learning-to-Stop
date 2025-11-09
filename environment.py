@@ -75,7 +75,6 @@ class MoveorStay(Environment):
         
         return stop_cost, running_cost, terminal_cost
         
-
 class MoveToRight(Environment):
     
     def __init__(self, T = 4, state_dim = 5, initial_mu = None, device = "cuda:0"):
@@ -98,7 +97,6 @@ class MoveToRight(Environment):
         
         return stop_cost, running_cost, terminal_cost
         
-
 class CongestionDice(Environment):
     def __init__(self, sides = 6, T = 6, initial_mu = None, device = "cuda:0"):
         self.sides = sides
@@ -142,7 +140,6 @@ class CongestionDice(Environment):
         next_nu_cont = torch.bmm(next_nu_cont.unsqueeze(1), P).squeeze(1)
         return next_nu_stop, next_nu_cont
     
-
 class DistCost(Environment):
     def __init__(self, T = 4, state_dim = 5, initial_mu = None, target_dist = None, device = "cuda:0"):
         self.T = T
